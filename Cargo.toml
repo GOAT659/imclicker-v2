@@ -1,0 +1,29 @@
+[package]
+name = "imclicker_v2"
+version = "0.1.0"
+edition = "2021"
+description = "Performance-focused desktop autoclicker UI in Rust for Windows"
+license = "MIT"
+
+[dependencies]
+eframe = { version = "0.27", default-features = true }
+egui = "0.27"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+directories = "5"
+
+[target.'cfg(windows)'.dependencies]
+windows-sys = { version = "0.59", features = [
+    "Win32_Foundation",
+    "Win32_Security",
+    "Win32_System_Threading",
+    "Win32_UI_Input_KeyboardAndMouse",
+] }
+
+[profile.release]
+opt-level = 3
+lto = "fat"
+codegen-units = 1
+panic = "abort"
+strip = "symbols"
+incremental = false
